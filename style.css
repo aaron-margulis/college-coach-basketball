@@ -1,0 +1,222 @@
+.hide {
+    display: none !important;
+}
+
+h1 {
+    margin: 0px; /* prefer not working with default header margins unless specified */
+}
+
+/* START SCREEN */
+#start-screen {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color: blue;
+}
+
+#start-screen h1 {
+
+}
+
+#start-screen form {
+
+}
+
+
+/* GAME BOX */
+/* GRID LAYOUT */
+#game-box {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 20px 100px auto 100px 20px;
+    grid-template-rows: 20px 50px auto 100px 20px;
+}
+
+#menu {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    border: 1px solid greenyellow;
+}
+
+#page-title {
+    grid-column: 3 / span 2;
+    grid-row: 2;
+    border: 1px solid greenyellow;
+}
+
+#dynamic-box {
+    grid-column: 3 / span 2;
+    grid-row: 3;
+    overflow-x: scroll;
+    border: 1px solid greenyellow;
+}
+
+#news-feed-container {
+    grid-column: 2 / span 2;
+    grid-row: 4;
+    overflow-x: scroll;
+    border: 1px solid greenyellow;
+}
+
+#advance-button-container {
+    grid-column: 4;
+    grid-row: 4;
+    border: 1px solid greenyellow;
+}
+
+/* GAME BOX */
+/* MENU */
+#menu button {
+    height: 25px;
+    width: 100%;
+    display: block;
+    background-color: rgba(0,0,0,0); /* transparent */
+    color: black;
+    font-size: 15px;
+    text-align: center;
+}
+
+#menu button:hover {
+    background-color: gray;
+    color: white;
+}
+
+#menu .active-page {
+    background-color: gray;
+    color: white;
+}
+
+/* DYNAMIC BOX */
+/* HOME PAGE */
+.home-page-active {
+
+}
+
+/* ROSTER PAGE */
+.roster-page-active {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 50px auto;
+}
+
+#roster-page-title {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.roster-page-active .team-toggle-form {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#player-table {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    margin: auto;
+    overflow: auto;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#player-table th {
+    border: 1px solid black;
+}
+
+#player-table .player-instance { /* non-header rows */
+    border: 1px solid black;
+}
+
+#player-table .player-instance td {
+    border: 1px solid black;
+}
+
+/* SCHEDULE PAGE */
+.schedule-page-active {
+
+}
+
+/* STANDINGS PAGE */
+.standings-page-active {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50px auto;
+}
+
+#standings-page-title {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+}
+
+#standings-table {
+    grid-column: 1;
+    grid-row: 2;
+    margin: auto;
+    overflow: auto;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#standings-table th {
+    border: 1px solid black;
+}
+
+#standings-table .team-instance { /* non-header rows */
+    border: 1px solid black;
+}
+
+#standings-table .team-instance td {
+    border: 1px solid black;
+}
+
+/* RECRUITS PAGE */
+.recruits-page-active {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50px auto;
+}
+
+#recruits-page-title {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#recruits-table {
+    grid-column: 1;
+    grid-row: 2;
+    margin: auto;
+    overflow: auto;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+#recruits-table th {
+    border: 1px solid black;
+}
+
+#recruits-table .player-instance { /* non-header rows */
+    border: 1px solid black;
+}
+
+#recruits-table .player-instance td {
+    border: 1px solid black;
+}
+
+
+/* NEWS FEED */
+#news-feed {
+
+}
+
+/* ADVANCE BUTTON */
+#advance-button {
+
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>COLLEGE COACH BASKETBALL</title>
+        <meta name="description" content="Client-side web browser college basketball coach game.">
+        <meta name="author" content="Aaron Margulis">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <!--
+        <div id="header">
+            <h1>COLLEGE COACH BASKETBALL</h1>
+        </div>
+        -->
+
+        <div id="start-screen">
+            <h1>WELCOME TO COLLEGE COACH BASKETBALL</h1>
+            <form action="javascript:initializeGame();">
+                <label for="select-user-name">What is your name:</label>
+                <input type="text" id="select-user-name" name="name" required>
+
+                <label for="select-user-team">What team would you like to coach?</label>
+                <select id="select-user-team" name="team" required>
+                    <option value="">Team</option>
+                    <!-- populate via JS -->
+                </select>
+
+                <input type="submit" value="START">
+            </form>
+            <p>WARNING: If you refresh or go back a page all progress will be lost.</p>
+        </div>
+
+        <div class="hide" id="game-box">
+
+            <div id="menu">
+                <button class="active-page" id="menu-home">Home</button> <!-- doesn't matter which button is initally assigned "active-page" class so long as exactly one is -->
+                <button id="menu-roster">Roster</button>
+                <button id="menu-schedule">Schedule</button>
+                <button id="menu-standings">Standings</button>
+                <button id="menu-recruits">Recruits</button>
+            </div>
+
+            <div id="page-title">
+                <!-- populate via JS -->
+            </div>
+
+            <div id="dynamic-box">
+                <!-- populate via JS -->
+            </div>
+
+            <div id="news-feed-container">
+                <ol id="news-feed">
+                    <!-- populate via JS -->
+                </ol>
+            </div>
+
+            <div id="advance-button-container">
+                <button id="advance-button">
+                    <!-- populate via JS -->
+                </button>
+            </div>
+
+        </div>
+
+        <script src="javascript.js"></script>
+    </body>
+</html>
