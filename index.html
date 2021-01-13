@@ -15,7 +15,7 @@
         -->
 
         <div id="start-screen">
-            <h1>WELCOME TO COLLEGE COACH BASKETBALL</h1>
+            <h1>WELCOME TO<br>COLLEGE COACH BASKETBALL</h1>
             <form action="javascript:initializeGame();">
                 <label for="select-user-name">What is your name:</label>
                 <input type="text" id="select-user-name" name="name" required>
@@ -26,7 +26,7 @@
                     <!-- populate via JS -->
                 </select>
 
-                <input type="submit" value="START">
+                <input id="start-screen-button" type="submit" value="START">
             </form>
             <p>WARNING: If you refresh or go back a page all progress will be lost.</p>
         </div>
@@ -50,9 +50,9 @@
             </div>
 
             <div id="news-feed-container">
-                <ol id="news-feed">
+                <ul id="news-feed">
                     <!-- populate via JS -->
-                </ol>
+                </ul>
             </div>
 
             <div id="advance-button-container">

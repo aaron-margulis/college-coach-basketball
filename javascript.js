@@ -50,24 +50,73 @@ BACK END
 var settings = {
     "roster-size": 10,
     "num-recruits": Object.keys(teams).length * 5,
-    "num-games": 14
+    "num-games": 14,
+    "commit-interest-req": 100,
+    "user-weekly-recruiting-time": 60,
+}
+
+var recruitingOptions = {
+    "Email": {
+        "interest-boost": 5,
+        "time": 10
+    },
+    "Call": {
+        "interest-boost": 20,
+        "time": 30
+    }
 }
 
 // will use gameData throughout game instance as parent object
 var gameData = {
     "teams": teams,
     "current-week": 1,
-    "current-season": 1,
-    "settings": settings
+    "current-season": 2020,
+    "settings": settings,
+    "recruiting-options": recruitingOptions,
+    "user-current-week-recruiting-time": settings["user-weekly-recruiting-time"],
+    "recruit-id-iterator": 0,
+    "name-generator-list": []
 };
+
+function nameAPI(){
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(data);
+            gameData["name-generator-list"].concat(data);
+        } else if (this.readyState == 4) {
+            console.log(this.responseText);
+            gameData["name-generator-list"].push("First Last");
+        };
+    }
+
+    xhttp.open("GET", "http://names.drycodes.com/100?nameOptions=boy_names?separator=space", true);
+    //xhttp.send();
+}
+
+function nameGenerator(){
+    /*
+    if (gameData["name-generator-list"].length == 0) {
+        nameAPI(); // generate new names
+        nameGenerator(); // then try this again - should always go to else
+    } else {
+        var name = gameData["name-generator-list"][gameData["name-generator-list"].length-1];
+        gameData["name-generator-list"].pop();
+        return name;
+    };
+    */
+   return "*name*"
+}
 
 // generate one Player object instance
 function generatePlayer(position=null){
-    var name = "First Last"; // !!! FIX !!!
+    var name = nameGenerator();
     var year = Math.ceil(Math.random() * 4); // 1 thru 4
     if (position === null) {
         position = Math.ceil(Math.random() * 5); // 1 thru 5
-    }
+    };
     var rating = Math.ceil(Math.random() * 10); // 1 thru 10
 
     var player = {
@@ -89,7 +138,7 @@ function generateStartingRosters(){
                 var position = i+1;
             } else {
                 var position = null;
-            }
+            };
             roster[i] = generatePlayer(position);
         }
         gameData["teams"][team]["roster"] = roster;
@@ -98,22 +147,33 @@ function generateStartingRosters(){
 
 // generate one Recruit object instance
 function generateRecruit(){
-    var name = "First Last"; // !!! FIX !!!
+    var name = nameGenerator();
     var position = Math.ceil(Math.random() * 5); // 1 thru 5
     var rating = Math.ceil(Math.random() * 8); // 1 thru 8
+
+    var interest = {};
+    for (team in gameData["teams"]) {
+        interest[team] = Math.floor(Math.random() * 30);
+    }
+
+    var recruitId = gameData["recruit-id-iterator"];
+    gameData["recruit-id-iterator"] += 1;
 
     var recruit = {
         "name": name,
         "year": 0,
         "position": position,
-        "rating": rating
+        "rating": rating,
+        "interest": interest,
+        "commit": false
     };
-    gameData["recruiting-class"].push(recruit);
+
+    gameData["recruiting-class"][recruitId] = recruit;
 }
 
 // generate recruiting class
 function generateRecruitingClass(){
-    gameData["recruiting-class"] = []
+    gameData["recruiting-class"] = {}
     for (i = 0; i < gameData["settings"]["num-recruits"]; i++) {
         generateRecruit(); // edits gameData in place
     }
@@ -233,12 +293,15 @@ function updateStandings(matchResult){
 // advance from one week to the next within a season
 function advanceWeek(currentWeek){
     console.log("Advancing week...");
+    var news = "Simulating week " + gameData["current-week"] + "."
+    updateNewsFeed(news);
+
     // simulate all matches
     var matches = gameData["schedule"][currentWeek];
     for (match in matches) {
         var matchResult = simulateMatch(matches[match]["home-team"], matches[match]["away-team"]);
         console.log(matchResult);
-        var news = matchResult["winning-team"] + " beat " + matchResult["losing-team"] + " " + matchResult["winning-score"] + "-" + matchResult["losing-score"];
+        var news = matchResult["winning-team"] + " beats " + matchResult["losing-team"] + " " + matchResult["winning-score"] + "-" + matchResult["losing-score"] + ".";
         updateNewsFeed(news);
         updateStandings(matchResult);
     }
@@ -247,6 +310,10 @@ function advanceWeek(currentWeek){
     // !!!
 
     gameData["current-week"] += 1;
+    gameData["user-current-week-recruiting-time"] = gameData["settings"]["user-weekly-recruiting-time"];
+
+    var news = "Advancing to week " + gameData["current-week"] + "."
+    updateNewsFeed(news);
 }
 
 function resetStandings(){
@@ -260,15 +327,32 @@ function resetStandings(){
 }
 
 function addRecruitsToRosters(){
-    for (i = 0; i < gameData["recruiting-class"].length; i++) {
-        gameData["recruiting-class"][i]["year"] += 1;
+    // age recruits
+    for (recruit in gameData["recruiting-class"]) {
+        gameData["recruiting-class"][recruit]["year"] += 1;
     }
+
+    // add committed recruits
+    for (recruit in gameData["recruiting-class"]) {
+        if (gameData["recruiting-class"][recruit]["commit"] === true) {
+            var team = gameData["recruiting-class"][recruit]["commit-to"];
+            gameData["teams"][team]["roster"].push(gameData["recruiting-class"][recruit]);
+            delete gameData["recruiting-class"][recruit];
+        };
+    }
+
+    // fill incomplete rosters with remaining recruits randomly
     for (team in gameData["teams"]) {
+        console.log(team);
         var numEmptyRosterSpots = gameData["settings"]["roster-size"] - gameData["teams"][team]["roster"].length;
+        console.log(numEmptyRosterSpots);
         for (i = 0; i < numEmptyRosterSpots; i++) {
-            var index = Math.floor(Math.random() * gameData["recruiting-class"].length);
-            gameData["teams"][team]["roster"].push(gameData["recruiting-class"][index]);
-            gameData["recruiting-class"].splice(i,1);
+            var recruitsArray = Object.keys(gameData["recruiting-class"]); // need to recreate array everytime a recruit is deleted from it
+            var index = Math.floor(Math.random() * recruitsArray.length);
+            gameData["teams"][team]["roster"].push(gameData["recruiting-class"][recruitsArray[index]]);
+            console.log(gameData["recruiting-class"][recruitsArray[index]]);
+            recruitsArray.splice(index,1);
+            delete gameData["recruiting-class"][recruitsArray[index]];
         }
     }
 }
@@ -283,7 +367,7 @@ function advanceSeason(){
                 gameData["teams"][team]["roster"].splice(i,1);
             } else {
                 gameData["teams"][team]["roster"][i]["year"] += 1;
-            }
+            };
         }
     }
 
@@ -305,6 +389,29 @@ function advanceSeason(){
     // reset current week and increment current season
     gameData["current-week"] = 1;
     gameData["current-season"] += 1;
+    gameData["user-current-week-recruiting-time"] = gameData["settings"]["user-weekly-recruiting-time"];
+
+    var news = "Starting the " + gameData["current-season"] + " season!"
+    updateNewsFeed("-------------------------------");
+    updateNewsFeed(news);
+    updateNewsFeed("-------------------------------");
+}
+
+function userRecruitingAction(recruit, option){
+    var time = gameData["recruiting-options"][option]["time"];
+    var interestBoost = gameData["recruiting-options"][option]["interest-boost"];
+    var news = "Recruited " + gameData["recruiting-class"][recruit]["name"] + " for " + time + " minutes, increasing his interest in " + gameData["user-team"] + " by " + interestBoost + ".";
+
+    gameData["recruiting-class"][recruit]["interest"][gameData["user-team"]] += interestBoost;
+    if (gameData["recruiting-class"][recruit]["interest"][gameData["user-team"]] >= gameData["settings"]["commit-interest-req"]) {
+        gameData["recruiting-class"][recruit]["commit"] = true;
+        gameData["recruiting-class"][recruit]["commit-to"] = gameData["user-team"];
+        news += " " + gameData["recruiting-class"][recruit]["name"] + " has commit to " + gameData["user-team"] + "!";
+    };
+    gameData["user-current-week-recruiting-time"] -= time;
+
+    updateNewsFeed(news);
+    reloadActivePage();
 }
 
 
@@ -376,7 +483,7 @@ function loadRosterPage(team=gameData["user-team"]){
         option.innerHTML = iterTeam;
         if (iterTeam === team) { // currently displayed roster
             option.selected = "selected";
-        }
+        };
         teamToggleSelect.appendChild(option);
     }
     teamToggleForm.appendChild(teamToggleSelect);
@@ -552,7 +659,11 @@ function loadStandingsPage(){
         
         var tdWinPct = document.createElement("td");
         tdWinPct.classList.add("win-pct");
-        tdWinPct.innerHTML = wins / (wins + losses);
+        if (wins + losses > 0) {
+            tdWinPct.innerHTML = (wins / (wins + losses)).toFixed(3);
+        } else {
+            tdWinPct.innerHTML = (0).toFixed(3);
+        };
 
         var tdPtsF = document.createElement("td");
         tdPtsF.classList.add("points-for");
@@ -602,7 +713,7 @@ function loadRecruitsPage(){
     var titleDiv = document.getElementById("page-title");
     titleDiv.innerHTML = "";
     var title = document.createElement("h1");
-    title.innerHTML = "Recruits";
+    title.innerHTML = "Recruits (" + gameData["user-current-week-recruiting-time"] + " min. remaining this week)";
     titleDiv.appendChild(title);
     
     var recruitsTable = document.createElement("table");
@@ -616,32 +727,83 @@ function loadRecruitsPage(){
     thPos.innerHTML = "Position";
     var thRating = document.createElement("th");
     thRating.innerHTML = "Rating";
+    var thCommit = document.createElement("th");
+    thCommit.innerHTML = "Commit To";
+    var thUserInterest = document.createElement("th");
+    thUserInterest.innerHTML = "Interest in " + gameData["user-team"];
+    var thRecruitingActions = document.createElement("th");
+    thRecruitingActions.innerHTML = "Available Actions";
 
     tableHead.appendChild(thName);
     tableHead.appendChild(thPos);
     tableHead.appendChild(thRating);
+    tableHead.appendChild(thCommit);
+    tableHead.appendChild(thUserInterest);
+    tableHead.appendChild(thRecruitingActions);
     recruitsTable.appendChild(tableHead);
 
-    var recruitsArray = gameData["recruiting-class"];
-    for (recruit in recruitsArray) {
+    for (recruit in gameData["recruiting-class"]) {
         var playerRow = document.createElement("tr");
         playerRow.classList.add("player-instance");
+        playerRow.id = "recruit-" + recruit;
         
         var tdName = document.createElement("td");
         tdName.classList.add("name");
-        tdName.innerHTML = recruitsArray[recruit]["name"];
+        tdName.innerHTML = gameData["recruiting-class"][recruit]["name"];
         
         var tdPos = document.createElement("td");
         tdPos.classList.add("position");
-        tdPos.innerHTML = recruitsArray[recruit]["position"];
+        tdPos.innerHTML = gameData["recruiting-class"][recruit]["position"];
         
         var tdRating = document.createElement("td");
         tdRating.classList.add("rating");
-        tdRating.innerHTML = recruitsArray[recruit]["rating"];
+        tdRating.innerHTML = gameData["recruiting-class"][recruit]["rating"];
+
+        var tdCommit = document.createElement("td");
+        tdCommit.classList.add("commit");
+        if (gameData["recruiting-class"][recruit]["commit"] === false) {
+            tdCommit.innerHTML = "-";
+        } else {
+            tdCommit.innerHTML = gameData["recruiting-class"][recruit]["commit-to"];
+        };
+
+        var tdUserInterest = document.createElement("td");
+        tdUserInterest.classList.add("interest");
+        var userInterest = gameData["recruiting-class"][recruit]["interest"][gameData["user-team"]];
+        // tdUserInterest.innerHTML = userInterest;
+        var userInterestBarContainer = document.createElement("div");
+        userInterestBarContainer.classList.add("interest-bar-container");
+        tdUserInterest.appendChild(userInterestBarContainer);
+        var userInterestBarProgress = document.createElement("div");
+        userInterestBarProgress.setAttribute("style", "width:" + Math.min(Math.floor((userInterest/gameData["settings"]["commit-interest-req"])*100), 100) + "%");
+        userInterestBarProgress.classList.add("interest-bar-progress");
+        userInterestBarContainer.appendChild(userInterestBarProgress);
+
+        var tdRecruitingActions = document.createElement("td");
+        tdRecruitingActions.classList.add("recruiting-options");
+        for (option in gameData["recruiting-options"]) {
+            var recruitingActionButton = document.createElement("button");
+            recruitingActionButton.classList.add("recruiting-action-button");
+            recruitingActionButton.innerHTML = option + " (" + gameData["recruiting-options"][option]["time"] + " min.)";
+            if (gameData["recruiting-class"][recruit]["commit"] === true || gameData["recruiting-options"][option]["time"] > gameData["user-current-week-recruiting-time"]) {
+                recruitingActionButton.classList.add("recruiting-action-unavailable");
+            } else {
+                recruitingActionButton.addEventListener("click", (function(recruit, option) {
+                    return function() {
+                        console.log(recruit, option);
+                        userRecruitingAction(recruit, option);
+                    }
+                })(recruit, option));
+            };
+            tdRecruitingActions.appendChild(recruitingActionButton);
+        }
 
         playerRow.appendChild(tdName);
         playerRow.appendChild(tdPos);
         playerRow.appendChild(tdRating);
+        playerRow.appendChild(tdCommit);
+        playerRow.appendChild(tdUserInterest);
+        playerRow.appendChild(tdRecruitingActions);
         recruitsTable.appendChild(playerRow);
     }
 }
@@ -661,7 +823,7 @@ function reloadActivePage(){
         loadStandingsPage();
     } else if (activePage.id == "menu-recruits") {
         loadRecruitsPage();
-    }
+    };
     updateActionButton();
 }
 

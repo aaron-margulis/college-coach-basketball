@@ -1,3 +1,14 @@
+:root {
+    --primary: #264653;
+    --secondary: #f4a261;
+    --tertiary: #e76f51;
+}
+/* to use: color: var(--primary); */
+
+body {
+    background-color: var(--primary);
+}
+
 .hide {
     display: none !important;
 }
@@ -14,15 +25,55 @@ h1 {
     height: 100%;
     width: 100%;
     text-align: center;
-    background-color: blue;
+    background-color: white;
 }
 
 #start-screen h1 {
-
+    position: relative;
+    top: 10%;
+    font-size: 60px;
+    font-weight: 800;
+    color: var(--primary);
 }
 
 #start-screen form {
+    position: relative;
+    top: 25%;
+    width: 50%;
+    margin: auto;
+    padding: 5px;
+    background: var(--primary);
+    color: var(--secondary);
+    border-radius: 5px;
+}
 
+#start-screen form label, input, select {
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+}
+
+#start-screen-button {
+    background-color: rgba(0,0,0,0); /* transparent */
+    color: var(--secondary);
+    text-align: center;
+    border: 1px solid var(--secondary);
+    margin-bottom: 10px;
+}
+
+#start-screen-button:hover {
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    box-shadow: 2px 2px 4px var(--secondary);
+}
+
+#start-screen p {
+    position: relative;
+    top: 50%;
+    margin: auto;
+    font-size: 16px;
+    color: var(--primary);
 }
 
 
@@ -36,80 +87,108 @@ h1 {
     width: 100%;
     text-align: center;
     display: grid;
-    grid-template-columns: 20px 100px auto 100px 20px;
-    grid-template-rows: 20px 50px auto 100px 20px;
+    grid-template-columns: 20px 150px auto 150px 20px;
+    grid-template-rows: 20px 50px auto 200px 20px;
 }
 
 #menu {
     grid-column: 2;
     grid-row: 2 / span 2;
-    border: 1px solid greenyellow;
 }
 
 #page-title {
     grid-column: 3 / span 2;
     grid-row: 2;
-    border: 1px solid greenyellow;
 }
 
 #dynamic-box {
     grid-column: 3 / span 2;
     grid-row: 3;
-    overflow-x: scroll;
-    border: 1px solid greenyellow;
+    overflow: auto;
+    padding-bottom: 20px;
 }
 
 #news-feed-container {
     grid-column: 2 / span 2;
     grid-row: 4;
-    overflow-x: scroll;
-    border: 1px solid greenyellow;
+    overflow: auto;
+    border-top: 1px solid var(--secondary);
 }
 
 #advance-button-container {
     grid-column: 4;
     grid-row: 4;
-    border: 1px solid greenyellow;
+    border-top: 1px solid var(--secondary);
 }
 
 /* GAME BOX */
 /* MENU */
 #menu button {
-    height: 25px;
-    width: 100%;
+    height: 50px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 10px;
     display: block;
     background-color: rgba(0,0,0,0); /* transparent */
-    color: black;
-    font-size: 15px;
+    color: var(--secondary);
+    font-size: 20px;
+    font-weight: 800;
     text-align: center;
+    border: 1px solid var(--secondary);
 }
 
 #menu button:hover {
-    background-color: gray;
-    color: white;
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    box-shadow: 2px 2px 4px var(--secondary);
 }
 
 #menu .active-page {
-    background-color: gray;
-    color: white;
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+}
+
+/* PAGE TITLE */
+#page-title h1 {
+    top: 0px;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    font-size: 40px;
+    color: var(--secondary);
+    text-align: center;
+    width: 80%;
+    margin: auto;
+    border-bottom: 1px solid var(--secondary);
 }
 
 /* DYNAMIC BOX */
-/* HOME PAGE */
-.home-page-active {
-
+table {
+    border-collapse: collapse;
+    border: 1px solid var(--secondary);
+    color: var(--secondary);
 }
+
+table, tr, th, td {
+    border: 1px solid var(--secondary);
+}
+
+th, td {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* HOME PAGE */
 
 /* ROSTER PAGE */
 .roster-page-active {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: auto 200px;
     grid-template-rows: 50px auto;
-}
-
-#roster-page-title {
-    grid-column: 1;
-    grid-row: 1;
 }
 
 .roster-page-active .team-toggle-form {
@@ -117,106 +196,109 @@ h1 {
     grid-row: 1;
 }
 
+.roster-page-active select {
+    position: relative;
+    top: 15px;
+    height: 25px;
+    width: 80%;
+    margin: auto;
+    border: 1px solid var(--secondary);
+    border-radius: 0px;
+    background-color: rgba(0,0,0,0);
+    color: var(--secondary);
+}
+
 #player-table {
     grid-column: 1 / span 2;
     grid-row: 2;
+    position: relative;
+    top: 5px;
     margin: auto;
-    overflow: auto;
-    border-collapse: collapse;
-    border: 1px solid black;
-}
-
-#player-table th {
-    border: 1px solid black;
-}
-
-#player-table .player-instance { /* non-header rows */
-    border: 1px solid black;
-}
-
-#player-table .player-instance td {
-    border: 1px solid black;
 }
 
 /* SCHEDULE PAGE */
-.schedule-page-active {
-
-}
 
 /* STANDINGS PAGE */
-.standings-page-active {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 50px auto;
-}
-
-#standings-page-title {
-    grid-column: 1;
-    grid-row: 1;
-    position: sticky;
-}
-
 #standings-table {
-    grid-column: 1;
-    grid-row: 2;
+    position: relative;
+    top: 20px;
     margin: auto;
-    overflow: auto;
-    border-collapse: collapse;
-    border: 1px solid black;
-}
-
-#standings-table th {
-    border: 1px solid black;
-}
-
-#standings-table .team-instance { /* non-header rows */
-    border: 1px solid black;
-}
-
-#standings-table .team-instance td {
-    border: 1px solid black;
 }
 
 /* RECRUITS PAGE */
-.recruits-page-active {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: 50px auto;
-}
-
-#recruits-page-title {
-    grid-column: 1;
-    grid-row: 1;
-}
-
 #recruits-table {
-    grid-column: 1;
-    grid-row: 2;
+    position: relative;
+    top: 20px;
     margin: auto;
-    overflow: auto;
-    border-collapse: collapse;
-    border: 1px solid black;
+    margin-bottom: 20px;
 }
 
-#recruits-table th {
-    border: 1px solid black;
+.interest-bar-container {
+    height: 10px;
+    width: 100px;
+    margin: auto;
+    background-color: var(--tertiary);
+    z-index: 1;
 }
 
-#recruits-table .player-instance { /* non-header rows */
-    border: 1px solid black;
+.interest-bar-progress {
+    position: relative;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    background-color: var(--secondary);
+    z-index: 2;
 }
 
-#recruits-table .player-instance td {
-    border: 1px solid black;
+.recruiting-options .recruiting-action-button:not(:last-child) {
+    margin-right: 10px;
 }
 
+.recruiting-action-button {
+    color: var(--primary);
+    background-color: var(--secondary);
+    height: 20px;
+    font-size: 14px;
+    border: 0px;
+}
+
+.recruiting-action-unavailable {
+    text-decoration: line-through;
+    background-color: var(--tertiary);
+}
 
 /* NEWS FEED */
 #news-feed {
+    text-align: left;
+    font-size: 16px;
+    line-height: 24px;
+    vertical-align: middle;
+    color: var(--secondary);
+    list-style-type: none;
+}
 
+#news-feed li:nth-child(odd) {
+    background-color: rgba(250,250,250,0.05);
 }
 
 /* ADVANCE BUTTON */
 #advance-button {
+    position: relative;
+    top: 50px;
+    height: 100px;
+    width: 80%;
+    margin: auto;
+    background-color: rgba(0,0,0,0); /* transparent */
+    color: var(--secondary);
+    font-size: 20px;
+    font-weight: 800;
+    text-align: center;
+    border: 1px solid var(--secondary);
+}
 
+#advance-button:hover {
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    box-shadow: 2px 2px 4px var(--secondary);
 }
