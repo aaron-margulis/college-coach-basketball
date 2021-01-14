@@ -3,7 +3,6 @@
     --secondary: #f4a261;
     --tertiary: #e76f51;
 }
-/* to use: color: var(--primary); */
 
 body {
     background-color: var(--primary);
@@ -14,11 +13,11 @@ body {
 }
 
 h1 {
-    margin: 0px; /* prefer not working with default header margins unless specified */
+    margin: 0px; /* prefer not working with default header margins */
 }
 
-/* START SCREEN */
-#start-screen {
+/* START PAGE */
+#start-page {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -28,7 +27,7 @@ h1 {
     background-color: white;
 }
 
-#start-screen h1 {
+#start-page h1 {
     position: relative;
     top: 10%;
     font-size: 60px;
@@ -36,7 +35,7 @@ h1 {
     color: var(--primary);
 }
 
-#start-screen form {
+#start-page form {
     position: relative;
     top: 25%;
     width: 50%;
@@ -47,28 +46,28 @@ h1 {
     border-radius: 5px;
 }
 
-#start-screen form label, input, select {
+#start-page form label, input, select {
     display: block;
     margin: auto;
     margin-top: 5px;
 }
 
-#start-screen-button {
+#start-page-button {
+    margin-bottom: 10px;
+    text-align: center;
     background-color: rgba(0,0,0,0); /* transparent */
     color: var(--secondary);
-    text-align: center;
     border: 1px solid var(--secondary);
-    margin-bottom: 10px;
 }
 
-#start-screen-button:hover {
+#start-page-button:hover {
     background-color: var(--secondary);
-    border: 1px solid var(--primary);
     color: var(--primary);
+    border: 1px solid var(--primary);
     box-shadow: 2px 2px 4px var(--secondary);
 }
 
-#start-screen p {
+#start-page p {
     position: relative;
     top: 50%;
     margin: auto;
@@ -76,24 +75,23 @@ h1 {
     color: var(--primary);
 }
 
-#start-screen a {
+#start-page a {
     color: var(--primary);
     text-decoration-color: var(--secondary);
 }
 
-
-/* GAME BOX */
+/* GAME PAGE */
 /* GRID LAYOUT */
-#game-box {
+#game-page {
     position: absolute;
     top: 0px;
     left: 0px;
     height: 100%;
     width: 100%;
-    text-align: center;
     display: grid;
     grid-template-columns: 20px 150px auto 150px 20px;
     grid-template-rows: 20px 50px auto 200px 20px;
+    text-align: center;
 }
 
 #menu {
@@ -107,8 +105,6 @@ h1 {
 }
 
 #dynamic-box {
-    min-width: 800px;
-    min-height: 400px;
     grid-column: 3 / span 2;
     grid-row: 3;
     overflow: auto;
@@ -136,11 +132,11 @@ h1 {
     margin: auto;
     margin-bottom: 10px;
     display: block;
-    background-color: rgba(0,0,0,0); /* transparent */
-    color: var(--secondary);
     font-size: 20px;
     font-weight: 800;
     text-align: center;
+    background-color: rgba(0,0,0,0); /* transparent */
+    color: var(--secondary);
     border: 1px solid var(--secondary);
 }
 
@@ -161,13 +157,13 @@ h1 {
 #page-title h1 {
     top: 0px;
     height: 50px;
+    width: 80%;
+    margin: auto;
     line-height: 50px;
     vertical-align: middle;
     font-size: 40px;
-    color: var(--secondary);
     text-align: center;
-    width: 80%;
-    margin: auto;
+    color: var(--secondary);
     border-bottom: 1px solid var(--secondary);
 }
 
@@ -189,39 +185,58 @@ th, td {
     padding-right: 10px;
 }
 
+.user-game-highlight {
+    color: var(--tertiary) !important;
+}
+
 /* HOME PAGE */
 .home-page-active {
+    height: calc(100% - 20px);
+    width: 100%;
     display: grid;
-    grid-template-columns: auto 200px;
-    grid-template-rows: 200px auto;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 180px 20px auto;
+    padding-top: 20px;
+}
+
+.home-page-active div {
+    overflow: auto;
+}
+
+.home-page-active table {
+    margin: auto;
 }
 
 #standings-preview {
     grid-column: 1;
     grid-row: 1;
-    border: 1px solid hotpink;
-}
-
-#standings-preview table {
-    margin: auto;
-    overflow: auto;
 }
 
 #recruits-preview {
     grid-column: 2;
     grid-row: 1;
-    border: 1px solid hotpink;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 32px auto; /* header and table */
+}
+
+#recruits-preview h2 {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0px;
+    color: var(--secondary);
+    font-size: 22px;
+}
+
+#recruits-preview table {
+    grid-column: 1;
+    grid-row: 2;
+    overflow: auto;
 }
 
 #schedule-preview {
     grid-column: 1 / span 2;
-    grid-row: 2;
-    border: 1px solid hotpink;
-}
-
-#schedule-preview table {
-    margin: auto;
-    overflow: auto;
+    grid-row: 3;
 }
 
 /* ROSTER PAGE */
@@ -242,10 +257,10 @@ th, td {
     height: 25px;
     width: 80%;
     margin: auto;
-    border: 1px solid var(--secondary);
-    border-radius: 0px;
     background-color: rgba(0,0,0,0);
     color: var(--secondary);
+    border: 1px solid var(--secondary);
+    border-radius: 0px;
 }
 
 #player-table {
@@ -302,16 +317,16 @@ th, td {
 }
 
 .recruiting-action-button {
-    color: var(--primary);
-    background-color: var(--secondary);
     height: 20px;
     font-size: 14px;
+    background-color: var(--secondary);
+    color: var(--primary);
     border: 0px;
 }
 
 .recruiting-action-unavailable {
-    text-decoration: line-through;
     background-color: var(--tertiary);
+    text-decoration: line-through;
 }
 
 /* NEWS FEED */
@@ -335,11 +350,11 @@ th, td {
     height: 100px;
     width: 80%;
     margin: auto;
-    background-color: rgba(0,0,0,0); /* transparent */
-    color: var(--secondary);
     font-size: 20px;
     font-weight: 800;
     text-align: center;
+    background-color: rgba(0,0,0,0); /* transparent */
+    color: var(--secondary);
     border: 1px solid var(--secondary);
 }
 

@@ -1,7 +1,4 @@
-/*
-START PAGE
-*/
-
+/* START PAGE */
 var teams = {
     "New York": {
         "mascot": "Pants"
@@ -43,16 +40,13 @@ populateTeamSelect(teams); // run ASAP
 
 
 
-/*
-BACK END
-*/
-
+/* BACK END */
 var settings = {
     "roster-size": 10,
-    "num-recruits": Object.keys(teams).length * 5,
     "num-games": 14,
-    "commit-interest-req": 100,
-    "user-weekly-recruiting-time": 60,
+    "num-recruits": Object.keys(teams).length * 5, // 5 per team
+    "interest-required-to-commit": 100,
+    "weekly-recruiting-time-per-team": 60,
 };
 
 var recruitingOptions = {
@@ -66,18 +60,18 @@ var recruitingOptions = {
     }
 };
 
-// will use gameData throughout game instance as parent object
+// will use gameData to store all information
 var gameData = {
     "teams": teams,
-    "current-week": 1,
-    "current-season": 2020,
     "settings": settings,
-    "recruiting-options": recruitingOptions,
-    "user-current-week-recruiting-time": settings["user-weekly-recruiting-time"],
     "recruit-id-iterator": 0,
-    "name-generator-list": []
+    "recruiting-options": recruitingOptions,
+    "user-current-week-recruiting-time": settings["weekly-recruiting-time-per-team"],
+    "current-week": 1,
+    "current-season": 2020
 };
 
+// returns First Last name
 function nameGenerator(){
     // https://gist.githubusercontent.com/BenjaminAdams/4f6175e7ede6af50e9ee/raw/85e7868a87116e27998cd845540d199907061cfe/maleNames.js
     var firstNames = ["Jacob","Michael","Matthew","Joshua","Christopher","Nicholas","Andrew","Joseph","Daniel","Tyler","William","Brandon","Ryan","John","Zachary","David","Anthony","James","Justin","Alexander","Jonathan","Christian","Austin","Dylan","Ethan","Benjamin","Noah","Samuel","Robert","Nathan","Cameron","Kevin","Thomas","Jose","Hunter","Jordan","Kyle","Caleb","Jason","Logan","Aaron","Eric","Brian","Gabriel","Adam","Jack","Isaiah","Juan","Luis","Connor","Charles","Elijah","Isaac","Steven","Evan","Jared","Sean","Timothy","Luke","Cody","Nathaniel","Alex","Seth","Mason","Richard","Carlos","Angel","Patrick","Devin","Bryan","Cole","Jackson","Ian","Garrett","Trevor","Jesus","Chase","Adrian","Mark","Blake","Sebastian","Antonio","Lucas","Jeremy","Gavin","Miguel","Julian","Dakota","Alejandro","Jesse","Dalton","Bryce","Tanner","Kenneth","Stephen","Jake","Victor","Spencer","Marcus","Paul","Brendan","Jeremiah","Xavier","Jeffrey","Tristan","Jalen","Jorge","Edward","Riley","Wyatt","Colton","Joel","Maxwell","Aidan","Travis","Shane","Colin","Dominic","Carson","Vincent","Derek","Oscar","Grant","Eduardo","Peter","Henry","Parker","Hayden","Collin","George","Bradley","Mitchell","Devon","Ricardo","Shawn","Taylor","Nicolas","Francisco","Gregory","Liam","Kaleb","Preston","Erik","Alexis","Owen","Omar","Diego","Dustin","Corey","Fernando","Clayton","Carter","Ivan","Jaden","Javier","Alec","Johnathan","Scott","Manuel","Cristian","Alan","Raymond","Brett","Max","Andres","Gage","Mario","Dawson","Dillon","Cesar","Wesley","Levi","Jakob","Chandler","Martin","Malik","Edgar","Trenton","Sergio","Josiah","Nolan","Marco","Peyton","Harrison","Hector","Micah","Roberto","Drew","Brady","Erick","Conner","Jonah","Casey","Jayden","Emmanuel","Edwin","Andre","Phillip","Brayden","Landon","Giovanni","Bailey","Ronald","Braden","Damian","Donovan","Ruben","Frank","Pedro","Gerardo","Andy","Chance","Abraham","Calvin","Trey","Cade","Donald","Derrick","Payton","Darius","Enrique","Keith","Raul","Jaylen","Troy","Jonathon","Cory","Marc","Skyler","Rafael","Trent","Griffin","Colby","Johnny","Eli","Chad","Armando","Kobe","Caden","Cooper","Marcos","Elias","Brenden","Israel","Avery","Zane","Dante","Josue","Zackary","Allen","Mathew","Dennis","Leonardo","Ashton","Philip","Julio","Miles","Damien","Ty","Gustavo","Drake","Jaime","Simon","Jerry","Curtis","Kameron","Lance","Brock","Bryson","Alberto","Dominick","Jimmy","Kaden","Douglas","Gary","Brennan","Zachery","Randy","Louis","Larry","Nickolas","Tony","Albert","Fabian","Keegan","Saul","Danny","Tucker","Damon","Myles","Arturo","Corbin","Deandre","Ricky","Kristopher","Lane","Pablo","Darren","Zion","Jarrett","Alfredo","Micheal","Angelo","Carl","Oliver","Kyler","Tommy","Walter","Dallas","Jace","Quinn","Theodore","Grayson","Lorenzo","Joe","Arthur","Bryant","Brent","Roman","Russell","Ramon","Lawrence","Moises","Aiden","Quentin","Tyrese","Jay","Tristen","Emanuel","Salvador","Terry","Morgan","Jeffery","Esteban","Tyson","Braxton","Branden","Brody","Craig","Marvin","Ismael","Rodney","Isiah","Maurice","Marshall","Ernesto","Emilio","Brendon","Kody","Eddie","Malachi","Abel","Keaton","Jon","Shaun","Skylar","Nikolas","Ezekiel","Santiago","Kendall","Axel","Camden","Trevon","Bobby","Conor","Jamal","Lukas","Malcolm","Zackery","Jayson","Javon","Reginald","Zachariah","Desmond","Roger","Felix","Dean","Johnathon","Quinton","Ali","Davis","Gerald","Demetrius","Rodrigo","Billy","Rene","Reece","Justice","Kelvin","Leo","Guillermo","Chris","Kevon","Steve","Frederick","Clay","Weston","Dorian","Hugo","Orlando","Roy","Terrance","Kai","Khalil","Graham","Noel","Nathanael","Willie","Terrell","Tyrone","Camron","Mauricio","Amir","Darian","Jarod","Nelson","Kade","Reese","Kristian","Garret","Marquis","Rodolfo","Dane","Felipe","Todd","Elian","Walker","Mateo","Jaylon","Kenny","Bruce","Ezra","Ross","Damion","Francis","Tate","Byron","Reid","Warren","Randall","Bennett","Jermaine","Triston","Jaquan","Harley","Jessie","Franklin","Duncan","Charlie","Reed","Blaine","Braeden","Holden","Ahmad","Issac","Kendrick","Melvin","Sawyer","Solomon","Moses","Jaylin","Sam","Cedric","Mohammad","Alvin","Beau","Jordon","Elliot","Lee","Darrell","Jarred","Mohamed","Davion","Wade","Tomas","Jaxon","Uriel","Deven","Maximilian","Rogelio","Gilberto","Ronnie","Julius","Allan","Brayan","Deshawn","Joey","Terrence","Noe","Alfonso","Ahmed","Tyree","Tyrell","Jerome","Devan","Neil","Ramiro","Pierce","Davon","Devonte","Jamie","Leon","Adan","Eugene","Stanley","Marlon","Quincy","Leonard","Wayne","Will","Alvaro","Ernest","Harry","Addison","Ray","Alonzo","Jadon","Jonas","Keyshawn","Rolando","Mohammed","Tristin","Donte","Dominique","Leonel","Wilson","Gilbert","Coby","Dangelo","Kieran","Colten","Keenan","Koby","Jarrod","Dale","Harold","Toby","Dwayne","Elliott","Osvaldo","Cyrus","Kolby","Sage","Coleman","Declan","Adolfo","Ariel","Brennen","Darryl","Trace","Orion","Shamar","Efrain","Keshawn","Rudy","Ulises","Darien","Braydon","Ben","Vicente","Nasir","Dayton","Joaquin","Karl","Dandre","Isaias","Rylan","Sterling","Cullen","Quintin","Stefan","Brice","Lewis","Gunnar","Humberto","Nigel","Alfred","Agustin","Asher","Daquan","Easton","Salvatore","Jaron","Nathanial","Ralph","Everett","Hudson","Marquise","Tobias","Glenn","Antoine","Jasper","Elvis","Kane","Sidney","Ezequiel","Tylor","Aron","Dashawn","Devyn","Mike","Silas","Jaiden","Jayce","Deonte","Romeo","Deon","Cristopher","Freddy","Kurt","Kolton","River","August","Roderick","Clarence","Derick","Jamar","Raphael","Rohan","Kareem","Muhammad","Demarcus","Sheldon","Markus","Cayden","Luca","Tre","Jamison","Jean","Rory","Brad","Clinton","Jaylan","Titus","Emiliano","Jevon","Julien","Alonso","Lamar","Cordell","Gordon","Ignacio","Jett","Keon","Baby","Cruz","Rashad","Tariq","Armani","Deangelo","Milton","Geoffrey","Elisha","Moshe","Bernard","Asa","Bret","Darion","Darnell","Izaiah","Irvin","Jairo","Howard","Aldo","Zechariah","Ayden","Garrison","Norman","Stuart","Kellen","Travon","Shemar","Dillan","Junior","Darrius","Rhett","Barry","Kamron","Jude","Rigoberto","Amari","Jovan","Octavio","Perry","Kole","Misael","Hassan","Jaren","Latrell","Roland","Quinten","Ibrahim","Justus","German","Gonzalo","Nehemiah","Forrest","Mackenzie","Anton","Chaz","Talon","Guadalupe","Austen","Brooks","Conrad","Greyson","Winston","Antwan","Dion","Lincoln","Leroy","Earl","Jaydon","Landen","Gunner","Brenton","Jefferson","Fredrick","Kurtis","Maximillian","Stephan","Stone","Shannon","Shayne","Karson","Stephon","Nestor","Frankie","Gianni","Keagan","Tristian","Dimitri","Kory","Zakary","Donavan","Draven","Jameson","Clifton","Daryl","Emmett","Cortez","Destin","Jamari","Dallin","Estevan","Grady","Davin","Santos","Marcel","Carlton","Dylon","Mitchel","Clifford","Syed","Adonis","Dexter","Keyon","Reynaldo","Devante","Arnold","Clark","Kasey","Sammy","Thaddeus","Glen","Jarvis","Garett","Infant","Keanu","Kenyon","Nick","Ulysses","Dwight","Kent","Denzel","Lamont","Houston","Layne","Darin","Jorden","Anderson","Kayden","Khalid","Antony","Deondre","Ellis","Marquez","Ari","Cornelius","Austyn","Brycen","Abram","Remington","Braedon","Reuben","Hamza","Ryder","Zaire","Terence","Guy","Jamel","Tevin","Alexandro","Jordy","Kelly","Porter","Trever","Dario","Jackie","Judah","Keven","Raymundo","Cristobal","Josef","Paris","Colt","Giancarlo","Rahul","Savion","Deshaun","Josh","Korey","Gerard","Jacoby","Lonnie","Reilly","Seamus","Don","Giovanny","Jamil","Kristofer","Samir","Benny","Dominik","Finn","Jan","Cale","Irving","Jaxson","Kaiden","Marcelo","Nico","Rashawn","Vernon","Aubrey","Gaven","Jabari","Sincere","Kirk","Maximus","Mikel","Davonte","Heath","Justyn","Kadin","Alden","Kelton","Brandan","Courtney","Camren","Dewayne","Darrin","Darrion","Duane","Elmer","Maverick","Nikhil","Sonny","Abdullah","Chaim","Nathen","Bronson","Xzavier","Efren","Jovani","Phoenix","Reagan","Blaze","Luciano","Royce","Tyrek","Tyshawn","Deontae","Fidel","Gaige","Aden","Neal","Ronaldo","Gideon","Prince","Rickey","Deion","Denver","Benito","London","Matteo","Samson","Bernardo","Raven","Simeon","Turner","Carlo","Gino","Johan","Ryley","Domenic","Hugh","Rocky","Trystan","Emerson","Trevion","Heriberto","Joan","Marques","Raheem","Tyreek","Vaughn","Clint","Nash","Mariano","Myron","Ladarius","Lloyd","Omari","Keshaun","Pierre","Rick","Xander","Eliseo","Jeff","Bradly","Freddie","Kavon","Mekhi","Sabastian","Shea","Dan","Adrien","Alessandro","Isai","Kian","Maximiliano","Paxton","Rasheed","Blaise","Brodie","Donnie","Isidro","Jaeden","Javion","Jimmie","Johnnie","Kennedy","Tyrique","Andreas","Augustus","Jalon","Jamir","Valentin","Korbin","Lawson","Maxim","Fred","Herbert","Amos","Bruno","Donavon","Javonte","Ean","Kamren","Rowan","Alek","Brandyn","Demarco","Hernan","Alexzander","Bo","Branson","Brennon","Genaro","Jamarcus","Aric","Barrett","Rey","Braiden","Brant","Dontae","Harvey","Jovany","Kale","Nicklaus","Zander","Dillion","Donnell","Kylan","Treyvon","Vincenzo","Dayne","Francesco","Isaak","Jaleel","Lionel","Tracy","Giovani","Tavian","Alexandre","Darwin","Tyron","Dequan"]
@@ -87,14 +81,14 @@ function nameGenerator(){
     return firstNames[Math.floor(Math.random() * firstNames.length)] + " " + lastNames[Math.floor(Math.random() * lastNames.length)]
 }
 
-// generate one Player object instance
+// return one randomly generated Player
 function generatePlayer(position=null){
     var name = nameGenerator();
-    var year = Math.ceil(Math.random() * 4); // 1 thru 4
-    if (position === null) {
+    var year = Math.ceil(Math.random() * 4);
+    if (position === null) { // assume valid input otherwise
         position = Math.ceil(Math.random() * 5); // 1 thru 5
-    };
-    var rating = Math.ceil(Math.random() * 10); // 1 thru 10
+    }
+    var rating = Math.ceil(Math.random() * 10);
 
     var player = {
         "name": name,
@@ -102,39 +96,45 @@ function generatePlayer(position=null){
         "position": position,
         "rating": rating
     };
+
     return player;
 }
 
-// generate Roster for each team. Roster is array of Player objects
+// generate initial Roster for each team
+// currently, Roster is an array of Players, may be changed to object shortly
 function generateStartingRosters(){
     for (team in gameData["teams"]) {
         var roster = [];
         for (i = 0; i < gameData["settings"]["roster-size"]; i++) {
             // ensure each team has one player at each position, then randomize player positions
+            // that being said, positions do not currently matter
             if (i < 5) {
                 var position = i+1;
             } else {
                 var position = null;
-            };
+            }
             roster[i] = generatePlayer(position);
         }
         gameData["teams"][team]["roster"] = roster;
+        // Team overall ratings are currently average rating of rostered players
         gameData["teams"][team]["overall-rating"] = roster.reduce((accum,item) => accum + item["rating"], 0) / roster.length;
     }
-
 }
 
-// generate one Recruit object instance
+// generate one Recruit
+// alter gameData in place
 function generateRecruit(){
     var name = nameGenerator();
-    var position = Math.ceil(Math.random() * 5); // 1 thru 5
-    var rating = Math.ceil(Math.random() * 8); // 1 thru 8
+    var position = Math.ceil(Math.random() * 5);
+    var rating = Math.ceil(Math.random() * 10);
 
+    // begins with 0-30% interest in each team, randomly determined
     var interest = {};
     for (team in gameData["teams"]) {
-        interest[team] = Math.floor(Math.random() * 30);
+        interest[team] = Math.floor(Math.random() * 0.3 * gameData["settings"]["interest-required-to-commit"]);
     }
 
+    // give each recruit unique ID
     var recruitId = gameData["recruit-id-iterator"];
     gameData["recruit-id-iterator"] += 1;
 
@@ -147,18 +147,20 @@ function generateRecruit(){
         "interest": interest,
         "commit": false
     };
-
+ 
     gameData["recruiting-class"][recruitId] = recruit;
 }
 
 // generate recruiting class
 function generateRecruitingClass(){
-    gameData["recruiting-class"] = {}
+    gameData["recruiting-class"] = {};
     for (i = 0; i < gameData["settings"]["num-recruits"]; i++) {
-        generateRecruit(); // edits gameData in place
+        generateRecruit();
     }
 }
 
+// currently standings support the following counting stats: games played, wins, losses, points for, points against
+// alters gameData in place
 function generateStandings(){
     gameData["standings"] = {};
     for (team in gameData["teams"]) {
@@ -168,14 +170,13 @@ function generateStandings(){
             "losses": 0,
             "points-for": 0,
             "points-against": 0
-        }
+        };
     }
 }
 
-// generate one Schedule object instance
+// generate one season Schedule
+// alters gameData in place
 function generateSchedule(){
-    // gameData["settings"]["num-games"];
-
     // sample schedule:
     var schedule = {
         1: [{"home-team": "New York", "away-team": "Los Angeles"}, {"home-team": "Chicago", "away-team": "Houston"},
@@ -207,35 +208,37 @@ function generateSchedule(){
         14: [{"away-team": "Chicago", "home-team": "San Antonio"}, {"away-team": "Houston", "home-team": "San Diego"},
         {"away-team": "Phoenix", "home-team": "New York"}, {"away-team": "Philadelphia", "home-team": "Los Angeles"}]
     };
+
     gameData["schedule"] = schedule;
 }
 
 function initializeGame(){
-    // initialize game instance
     var name = document.getElementById("select-user-name").value;
     var team = document.getElementById("select-user-team").value;
     gameData["user-name"] = name;
     gameData["user-team"] = team;
 
-    // add loading screen if this is time-consuming
-    generateStartingRosters(); // updates gameData in place
-    generateRecruitingClass(); // updates gameData in place
-    setComputerRecruiting(); // updates gameData in place
-    generateStandings(); // updates gameData in place
-    generateSchedule(gameData["settings"]["num-games"]); // updates gameData in place
-    console.log(gameData);
+    generateStartingRosters();
+    generateRecruitingClass();
+    setComputerRecruiting();
+    generateStandings();
+    generateSchedule();
 
-    // change display
-    var startScreen = document.getElementById("start-screen");
-    startScreen.classList.add("hide");
-    var gameBox = document.getElementById("game-box");
-    gameBox.classList.remove("hide");
+    // change displayed page
+    var startPage = document.getElementById("start-page");
+    startPage.classList.add("hide");
+    var gamePage = document.getElementById("game-page");
+    gamePage.classList.remove("hide");
+
+    // load home page
     updateActionButton();
     loadHomePage();
 
     console.log("Game started!");
 }
 
+// following two functions, gaussianRand() and gaussianRandom() use CLT to generate pseudo-normally distributed random variables in given start-to-end range
+// currently being used to simulate scores in simulateMatch()
 // https://stackoverflow.com/a/39187274/9580322
 function gaussianRand() {
     var rand = 0;
@@ -251,20 +254,22 @@ function gaussianRandom(start, end) {
 }
 
 // simulate a match between two teams
+// returns match result object containing: winning team, losing team, winning score, losing score
 function simulateMatch(homeTeam, awayTeam){
     var homeTeamRating = gameData["teams"][homeTeam]["overall-rating"];
     var awayTeamRating = gameData["teams"][awayTeam]["overall-rating"];
-    console.log(homeTeam + ": " + homeTeamRating + ", " + awayTeam + ": " + awayTeamRating);
+
+    // currently using the following four lines as an extremely rudimentary game simulation mechanic before I implement something more complex
     var homeTeamAdj = 2*(homeTeamRating - awayTeamRating);
     var awayTeamAdj = 2*(awayTeamRating - homeTeamRating);
     var homeTeamScore = gaussianRandom(50+homeTeamAdj, 100+homeTeamAdj);
     var awayTeamScore = gaussianRandom(50+awayTeamAdj, 100+awayTeamAdj);
-
-    // for now simulation is very simple, and if they're tied just give the home team the winning point - call it home court advantage
+    // if teams tie,  give the home team the winning point - call it home court advantage
     if (homeTeamScore == awayTeamScore) {
         homeTeamScore += 1;
-    };
+    }
 
+    // determine winner
     if (homeTeamScore > awayTeamScore) {
         var winningTeam = homeTeam;
         var losingTeam = awayTeam;
@@ -275,7 +280,7 @@ function simulateMatch(homeTeam, awayTeam){
         var losingTeam = homeTeam;
         var winningScore = awayTeamScore;
         var losingScore = homeTeamScore;
-    };
+    }
     
     var result = {
         "winning-team": winningTeam,
@@ -283,10 +288,12 @@ function simulateMatch(homeTeam, awayTeam){
         "losing-team": losingTeam,
         "losing-score": losingScore
     };
+
     return result;
 }
 
-// update standings based on single match result
+// update standings given single match result
+// alters gameData in place
 function updateStandings(matchResult){
     var winningTeam = matchResult["winning-team"];
     var losingTeam = matchResult["losing-team"];
@@ -304,15 +311,17 @@ function updateStandings(matchResult){
     gameData["standings"][losingTeam]["points-against"] += winningScore;
 }
 
-// simulate computer-controlled teams recruiting activity
+// simulate computer-controlled team recruiting activity
 function weeklyComputerRecruiting(team){
-    var remainingTime = gameData["settings"]["user-weekly-recruiting-time"];
-    var targets = gameData["teams"][team]["recruiting-targets"];
+    var remainingTime = gameData["settings"]["weekly-recruiting-time-per-team"];
+    var targets = gameData["teams"][team]["recruiting-targets"]; // each computer team has an array, recruiting-targets, [reverse] ordered by their interested in each recruit
     for (i = targets.length-1; i >= 0; i--) {
+        // while they still have recruiting time available in the week, perform one randomly selected recruited action on their top available recruit,
+        // before doing so for their second favorite available recruit, etc.
         if (remainingTime > 0) {
             var recruit = targets[i]["id"];
             if (gameData["recruiting-class"][recruit]["commit"] == true) {
-                gameData["teams"][team]["recruiting-targets"].splice(i,1);
+                gameData["teams"][team]["recruiting-targets"].splice(i,1); // remove committed recruits from target list
             } else {
                 var availableOptions = Object.fromEntries(
                     Object.entries(gameData["recruiting-options"]).filter(
@@ -326,12 +335,12 @@ function weeklyComputerRecruiting(team){
                 var time = option["time"];
                 var interestBoost = option["interest-boost"];
                 gameData["recruiting-class"][recruit]["interest"][team] += interestBoost;
-                if (gameData["recruiting-class"][recruit]["interest"][team] >= gameData["settings"]["commit-interest-req"]) {
+                if (gameData["recruiting-class"][recruit]["interest"][team] >= gameData["settings"]["interest-required-to-commit"]) {
                     gameData["recruiting-class"][recruit]["commit"] = true;
                     gameData["recruiting-class"][recruit]["commit-to"] = team;
-                };
+                }
                 remainingTime -= time;
-            };
+            }
         } else {
             break;
         }
@@ -348,26 +357,37 @@ function advanceWeek(currentWeek){
     var matches = gameData["schedule"][currentWeek];
     for (match in matches) {
         var matchResult = simulateMatch(matches[match]["home-team"], matches[match]["away-team"]);
-        console.log(matchResult);
+        // alter gameData schedule in place to include match scores
+        if (matches[match]["home-team"] == matchResult["winning-team"]) {
+            gameData["schedule"][currentWeek][match]["home-score"] = matchResult["winning-score"];
+            gameData["schedule"][currentWeek][match]["away-score"] = matchResult["losing-score"];
+        } else {
+            gameData["schedule"][currentWeek][match]["home-score"] = matchResult["losing-score"];
+            gameData["schedule"][currentWeek][match]["away-score"] = matchResult["winning-score"];
+        }
+
         var news = matchResult["winning-team"] + " beats " + matchResult["losing-team"] + " " + matchResult["winning-score"] + "-" + matchResult["losing-score"] + ".";
         updateNewsFeed(news);
         updateStandings(matchResult);
     }
 
-    // simulate non-user controlled teams recruiting
+    // simulate computer team recruiting
     for (team in gameData["teams"]) {
         if (team != gameData["user-team"]) {
             weeklyComputerRecruiting(team);
-        };
+        }
     }
 
+    // advance one week and reset user's weekly recruiting allotment 
     gameData["current-week"] += 1;
-    gameData["user-current-week-recruiting-time"] = gameData["settings"]["user-weekly-recruiting-time"];
+    gameData["user-current-week-recruiting-time"] = gameData["settings"]["weekly-recruiting-time-per-team"];
 
     var news = "Advancing to week " + gameData["current-week"] + "."
     updateNewsFeed(news);
 }
 
+// resets standings
+// alters gameData in place
 function resetStandings(){
     for (team in gameData["standings"]) {
         gameData["standings"][team]["games-played"] = 0;
@@ -378,19 +398,21 @@ function resetStandings(){
     }
 }
 
+// adds committed recruits to roster of team they commit to, and fills out remaining open roster spots
+// alters gameData in place
 function addRecruitsToRosters(){
-    // age recruits
+    // age recruits one year
     for (recruit in gameData["recruiting-class"]) {
         gameData["recruiting-class"][recruit]["year"] += 1;
     }
 
-    // add committed recruits
+    // add committed recruits to committed team's roster
     for (recruit in gameData["recruiting-class"]) {
         if (gameData["recruiting-class"][recruit]["commit"] === true) {
             var team = gameData["recruiting-class"][recruit]["commit-to"];
             gameData["teams"][team]["roster"].push(gameData["recruiting-class"][recruit]);
             delete gameData["recruiting-class"][recruit];
-        };
+        }
     }
 
     // fill incomplete rosters with remaining recruits randomly
@@ -398,7 +420,7 @@ function addRecruitsToRosters(){
         console.log(team);
         var numEmptyRosterSpots = gameData["settings"]["roster-size"] - gameData["teams"][team]["roster"].length;
         for (i = 0; i < numEmptyRosterSpots; i++) {
-            var recruitsArray = Object.keys(gameData["recruiting-class"]); // need to recreate array everytime a recruit is deleted from it
+            var recruitsArray = Object.keys(gameData["recruiting-class"]); // need to recreate array everytime a recruit is deleted from it in order to not potentially select undefined index
             var index = Math.floor(Math.random() * recruitsArray.length);
             gameData["teams"][team]["roster"].push(gameData["recruiting-class"][recruitsArray[index]]);
             console.log(gameData["recruiting-class"][recruitsArray[index]]);
@@ -409,16 +431,20 @@ function addRecruitsToRosters(){
     }
 }
 
-// utilized by setComputerRecruiting *for now* to randomize each school's targets
+// utilized by setComputerRecruiting
+// returns shuffled version of input array
 function shuffleArray(array) {
     var shuffled = array;
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
+
     return shuffled;
 }
 
+// randomizea each school's target list
+// will likely be significantly altered in the near future to not use shuffleArray
 function setComputerRecruiting(){
     for (team in gameData["teams"]) {
         gameData["teams"][team]["recruiting-targets"] = [];
@@ -430,37 +456,31 @@ function setComputerRecruiting(){
 // advanced from one season to the next within the game
 function advanceSeason(){
     console.log("Advancing season...");
-    // age and graduate players
+    // age and graduate rostered players (not recruits)
     for (team in gameData["teams"]) {
         for (i = gameData["teams"][team]["roster"].length-1; i >= 0; i--) {
             if (gameData["teams"][team]["roster"][i]["year"] == 4) {
                 gameData["teams"][team]["roster"].splice(i,1);
             } else {
                 gameData["teams"][team]["roster"][i]["year"] += 1;
-            };
+            }
         }
     }
 
-    // add recruits to rosters
-    addRecruitsToRosters();  // updates gameData in place
+    addRecruitsToRosters();
 
     // progress player ratings
-    // progressPlayers();  // updates gameData in place
+    // progressPlayers();
 
-    // create new recruiting class
-    generateRecruitingClass();  // updates gameData in place
+    generateRecruitingClass();
     setComputerRecruiting();
-
-    // create new schedule
-    generateSchedule(); // updates gameData in place
-
-    // reset standings [and stats once implemented]
-    resetStandings(); // updates gameData in place
+    generateSchedule();
+    resetStandings();
 
     // reset current week and increment current season
     gameData["current-week"] = 1;
     gameData["current-season"] += 1;
-    gameData["user-current-week-recruiting-time"] = gameData["settings"]["user-weekly-recruiting-time"];
+    gameData["user-current-week-recruiting-time"] = gameData["settings"]["weekly-recruiting-time-per-team"];
 
     var news = "Starting the " + gameData["current-season"] + " season!"
     updateNewsFeed("-------------------------------");
@@ -468,17 +488,19 @@ function advanceSeason(){
     updateNewsFeed("-------------------------------");
 }
 
+// given recruitId and recruiting action option, performs recruiting action
+// looking to add more complexities in later iterations of game
 function userRecruitingAction(recruit, option){
     var time = gameData["recruiting-options"][option]["time"];
     var interestBoost = gameData["recruiting-options"][option]["interest-boost"];
     var news = "Recruited " + gameData["recruiting-class"][recruit]["name"] + " for " + time + " minutes, increasing his interest in " + gameData["user-team"] + " by " + interestBoost + ".";
 
     gameData["recruiting-class"][recruit]["interest"][gameData["user-team"]] += interestBoost;
-    if (gameData["recruiting-class"][recruit]["interest"][gameData["user-team"]] >= gameData["settings"]["commit-interest-req"]) {
+    if (gameData["recruiting-class"][recruit]["interest"][gameData["user-team"]] >= gameData["settings"]["interest-required-to-commit"]) {
         gameData["recruiting-class"][recruit]["commit"] = true;
         gameData["recruiting-class"][recruit]["commit-to"] = gameData["user-team"];
         news += " " + gameData["recruiting-class"][recruit]["name"] + " has commit to " + gameData["user-team"] + "!";
-    };
+    }
     gameData["user-current-week-recruiting-time"] -= time;
 
     updateNewsFeed(news);
@@ -487,10 +509,7 @@ function userRecruitingAction(recruit, option){
 
 
 
-/*
-FRONT END
-*/
-
+/* FRONT END */
 // load home page
 var menuHomeButton = document.getElementById("menu-home");
 menuHomeButton.addEventListener("click", function(){
@@ -510,10 +529,11 @@ function loadHomePage(){
     container.classList.remove(...container.classList); // clear current classList
     container.classList.add("home-page-active");
 
+    // update page title to reflect current page
     var titleDiv = document.getElementById("page-title");
     titleDiv.innerHTML = "";
     var title = document.createElement("h1");
-    title.innerHTML = "Home - UNDER CONSTRUCTION";
+    title.innerHTML = "Home";
     titleDiv.appendChild(title);
 
     // STANDINGS PREVIEW
@@ -545,33 +565,27 @@ function loadHomePage(){
 
     var teamRow = document.createElement("tr");
     teamRow.classList.add("team-instance");
-    
     var tdName = document.createElement("td");
     tdName.classList.add("name");
     tdName.innerHTML = gameData["user-team"];
-    
     var tdGames = document.createElement("td");
     tdGames.classList.add("games-played");
     tdGames.innerHTML = gameData["standings"][gameData["user-team"]]["games-played"];
-    
     var tdWins = document.createElement("td");
     tdWins.classList.add("wins");
     var wins = gameData["standings"][gameData["user-team"]]["wins"];
     tdWins.innerHTML = wins;
-    
     var tdLosses = document.createElement("td");
     tdLosses.classList.add("losses");
     var losses = gameData["standings"][gameData["user-team"]]["losses"];
     tdLosses.innerHTML = losses;
-    
     var tdWinPct = document.createElement("td");
     tdWinPct.classList.add("win-pct");
     if (wins + losses > 0) {
         tdWinPct.innerHTML = (wins / (wins + losses)).toFixed(3);
     } else {
         tdWinPct.innerHTML = (0).toFixed(3);
-    };
-
+    }
     teamRow.appendChild(tdName);
     teamRow.appendChild(tdGames);
     teamRow.appendChild(tdWinPct);
@@ -583,7 +597,51 @@ function loadHomePage(){
     var recruitsPreview = document.createElement("div");
     recruitsPreview.id = "recruits-preview";
     container.appendChild(recruitsPreview);
-    recruitsPreview.innerHTML = "Recruits preview under construction"
+
+    var recruitsHeader = document.createElement("h2");
+    recruitsHeader.innerHTML = "Committed Recruits";
+    recruitsPreview.appendChild(recruitsHeader);
+
+    var recruitsTableDiv = document.createElement("div"); // creating div specificially for table so I can scroll table without scrolling header
+    recruitsPreview.appendChild(recruitsTableDiv);
+    var recruitsTable = document.createElement("table");
+    recruitsTable.id = "recruits-preview-table";
+    recruitsTableDiv.appendChild(recruitsTable);
+
+    var tableHead = document.createElement("tr");
+    var thName = document.createElement("th");
+    thName.innerHTML = "Name";
+    var thPos = document.createElement("th");
+    thPos.innerHTML = "Position";
+    var thRating = document.createElement("th");
+    thRating.innerHTML = "Rating";
+    tableHead.appendChild(thName);
+    tableHead.appendChild(thPos);
+    tableHead.appendChild(thRating);
+    recruitsTable.appendChild(tableHead);
+
+    // should store committed recruits in Team object rather than using this inefficient solution
+    for (recruit in gameData["recruiting-class"]) {
+        if (gameData["recruiting-class"][recruit]["commit"] === true) {
+            if (gameData["recruiting-class"][recruit]["commit-to"] == gameData["user-team"]) {
+                var playerRow = document.createElement("tr");
+                playerRow.classList.add("player-instance");
+                var tdName = document.createElement("td");
+                tdName.classList.add("name");
+                tdName.innerHTML = gameData["recruiting-class"][recruit]["name"];
+                var tdPos = document.createElement("td");
+                tdPos.classList.add("position");
+                tdPos.innerHTML = gameData["recruiting-class"][recruit]["position"];
+                var tdRating = document.createElement("td");
+                tdRating.classList.add("rating");
+                tdRating.innerHTML = gameData["recruiting-class"][recruit]["rating"];
+                playerRow.appendChild(tdName);
+                playerRow.appendChild(tdPos);
+                playerRow.appendChild(tdRating);
+                recruitsTable.appendChild(playerRow);
+            }
+        }
+    }
 
     // SCHEDULE PREVIEW
     var schedulePreview = document.createElement("div");
@@ -628,19 +686,27 @@ function loadHomePage(){
                 tdHomeTeam.innerHTML = gameData["schedule"][week][match]["home-team"];
                 tdAwayTeam = document.createElement("td");
                 tdAwayTeam.innerHTML = gameData["schedule"][week][match]["away-team"];
-                // !! scores from match results not added to schedule !!
                 tdHomeScore = document.createElement("td");
-                // tdHomeScore.innerHTML = gameData["schedule"][week][match]["home-score"];
-                tdHomeScore.innerHTML =  "-";
                 tdAwayScore = document.createElement("td");
-                // tdAwayScore.innerHTML = gameData["schedule"][week][match]["away-team"];
-                tdAwayScore.innerHTML = "-";
-
+                if (typeof gameData["schedule"][week][match]["home-score"] !== "undefined") {
+                    tdHomeScore.innerHTML = gameData["schedule"][week][match]["home-score"];
+                    tdAwayScore.innerHTML = gameData["schedule"][week][match]["away-score"];
+                } else {
+                    tdHomeScore.innerHTML =  "-";
+                    tdAwayScore.innerHTML =  "-";
+                }
+                if (gameData["schedule"][week][match]["home-team"] == gameData["user-team"]) {
+                    tdHomeTeam.classList.add("user-game-highlight");
+                    tdHomeScore.classList.add("user-game-highlight");
+                } else if (gameData["schedule"][week][match]["away-team"] == gameData["user-team"]) {
+                    tdAwayTeam.classList.add("user-game-highlight");
+                    tdAwayScore.classList.add("user-game-highlight");
+                }
                 homeTeamRow.appendChild(tdHomeTeam);
                 awayTeamRow.appendChild(tdAwayTeam);
                 homeScoreRow.appendChild(tdHomeScore);
                 awayScoreRow.appendChild(tdAwayScore);
-            };
+            }
         }
     }
     scheduleTable.appendChild(homeTeamRow);
@@ -668,6 +734,7 @@ function loadRosterPage(team=gameData["user-team"]){
     container.classList.remove(...container.classList); // clear current classList
     container.classList.add("roster-page-active");
 
+    // update page title to reflect current page
     var titleDiv = document.getElementById("page-title");
     titleDiv.innerHTML = "";
     var title = document.createElement("h1");
@@ -686,7 +753,7 @@ function loadRosterPage(team=gameData["user-team"]){
         option.innerHTML = iterTeam;
         if (iterTeam === team) { // currently displayed roster
             option.selected = "selected";
-        };
+        }
         teamToggleSelect.appendChild(option);
     }
     teamToggleForm.appendChild(teamToggleSelect);
@@ -703,7 +770,7 @@ function loadRosterPagePlayers(team=null) {
     if (team === null) {
         var teamToggleSelect = document.getElementById("team-toggle-select");
         team = teamToggleSelect.value;
-    };
+    }
 
     console.log("Load " + team + " player list.");
 
@@ -725,7 +792,6 @@ function loadRosterPagePlayers(team=null) {
     thRating.innerHTML = "Rating";
     var thYear = document.createElement("th");
     thYear.innerHTML = "Year";
-
     tableHead.appendChild(thName);
     tableHead.appendChild(thPos);
     tableHead.appendChild(thRating);
@@ -736,23 +802,18 @@ function loadRosterPagePlayers(team=null) {
     for (player in rosterArray) {
         var playerRow = document.createElement("tr");
         playerRow.classList.add("player-instance");
-        
         var tdName = document.createElement("td");
         tdName.classList.add("name");
         tdName.innerHTML = rosterArray[player]["name"];
-        
         var tdPos = document.createElement("td");
         tdPos.classList.add("position");
         tdPos.innerHTML = rosterArray[player]["position"];
-        
         var tdRating = document.createElement("td");
         tdRating.classList.add("rating");
         tdRating.innerHTML = rosterArray[player]["rating"];
-        
         var tdYear = document.createElement("td");
         tdYear.classList.add("year");
         tdYear.innerHTML = rosterArray[player]["year"];
-
         playerRow.appendChild(tdName);
         playerRow.appendChild(tdPos);
         playerRow.appendChild(tdRating);
@@ -780,10 +841,11 @@ function loadSchedulePage(){
     container.classList.remove(...container.classList); // clear current classList
     container.classList.add("schedule-page-active");
 
+    // update page title to reflect current page
     var titleDiv = document.getElementById("page-title");
     titleDiv.innerHTML = "";
     var title = document.createElement("h1");
-    title.innerHTML = "Schedule - UNDER CONSTRUCTION";
+    title.innerHTML = "Schedule";
     titleDiv.appendChild(title);
 
     for (week in gameData["schedule"]) {
@@ -814,26 +876,26 @@ function loadSchedulePage(){
         for (match in gameData["schedule"][week]) {
             var matchRow = document.createElement("tr");
             matchRow.classList.add("match-instance");
-            
             var tdHomeTeam = document.createElement("td");
             tdHomeTeam.classList.add("home-team");
             tdHomeTeam.innerHTML = gameData["schedule"][week][match]["home-team"];
-            
             var tdAwayTeam = document.createElement("td");
             tdAwayTeam.classList.add("home-team");
             tdAwayTeam.innerHTML = gameData["schedule"][week][match]["away-team"];
-
-            // !! scores from match results not added to schedule !!
+            if (gameData["schedule"][week][match]["home-team"] == gameData["user-team"] || gameData["schedule"][week][match]["away-team"] == gameData["user-team"]) {
+                matchRow.classList.add("user-game-highlight");
+            }
             var tdHomeScore = document.createElement("td");
             tdHomeScore.classList.add("home-score");
-            // tdHomeScore.innerHTML = gameData["schedule"][week][match]["home-score"];
-            tdHomeScore.innerHTML =  "-";
-            
             var tdAwayScore = document.createElement("td");
             tdAwayScore.classList.add("away-score");
-            // tdAwayScore.innerHTML = gameData["schedule"][week][match]["away-team"];
-            tdAwayScore.innerHTML = "-";
-
+            if (typeof gameData["schedule"][week][match]["home-score"] !== "undefined") {
+                tdHomeScore.innerHTML = gameData["schedule"][week][match]["home-score"];
+                tdAwayScore.innerHTML = gameData["schedule"][week][match]["away-score"];
+            } else {
+                tdHomeScore.innerHTML =  "-";
+                tdAwayScore.innerHTML =  "-";
+            }
             matchRow.appendChild(tdHomeTeam);
             matchRow.appendChild(tdAwayTeam);
             matchRow.appendChild(tdHomeScore);
@@ -862,6 +924,7 @@ function loadStandingsPage(){
     container.classList.remove(...container.classList); // clear current classList
     container.classList.add("standings-page-active");
 
+    // update page title to reflect current page
     var titleDiv = document.getElementById("page-title");
     titleDiv.innerHTML = "";
     var title = document.createElement("h1");
@@ -902,47 +965,41 @@ function loadStandingsPage(){
     for (iterTeam in gameData["standings"]) {
         var teamRow = document.createElement("tr");
         teamRow.classList.add("team-instance");
-        
+        if (iterTeam == gameData["user-team"]) {
+            teamRow.classList.add("user-game-highlight");
+        }
         var tdName = document.createElement("td");
         tdName.classList.add("name");
         tdName.innerHTML = iterTeam;
-        
         var tdGames = document.createElement("td");
         tdGames.classList.add("games-played");
         tdGames.innerHTML = gameData["standings"][iterTeam]["games-played"];
-        
         var tdWins = document.createElement("td");
         tdWins.classList.add("wins");
         var wins = gameData["standings"][iterTeam]["wins"];
         tdWins.innerHTML = wins;
-        
         var tdLosses = document.createElement("td");
         tdLosses.classList.add("losses");
         var losses = gameData["standings"][iterTeam]["losses"];
         tdLosses.innerHTML = losses;
-        
         var tdWinPct = document.createElement("td");
         tdWinPct.classList.add("win-pct");
         if (wins + losses > 0) {
             tdWinPct.innerHTML = (wins / (wins + losses)).toFixed(3);
         } else {
             tdWinPct.innerHTML = (0).toFixed(3);
-        };
-
+        }
         var tdPtsF = document.createElement("td");
         tdPtsF.classList.add("points-for");
         var ptsF = gameData["standings"][iterTeam]["points-for"];
         tdPtsF.innerHTML = ptsF;
-        
         var tdPtsA = document.createElement("td");
         tdPtsA.classList.add("points-against");
         var ptsA = gameData["standings"][iterTeam]["points-against"];
         tdPtsA.innerHTML = ptsA;
-        
         var tdPtsDiff = document.createElement("td");
         tdPtsDiff.classList.add("points-diff");
         tdPtsDiff.innerHTML = ptsF - ptsA;
-
         teamRow.appendChild(tdName);
         teamRow.appendChild(tdGames);
         teamRow.appendChild(tdWinPct);
@@ -974,6 +1031,7 @@ function loadRecruitsPage(){
     container.classList.remove(...container.classList); // clear current classList
     container.classList.add("recruits-page-active");
 
+    // update page title to reflect current page
     var titleDiv = document.getElementById("page-title");
     titleDiv.innerHTML = "";
     var title = document.createElement("h1");
@@ -997,7 +1055,6 @@ function loadRecruitsPage(){
     thUserInterest.innerHTML = "Interest in " + gameData["user-team"];
     var thRecruitingActions = document.createElement("th");
     thRecruitingActions.innerHTML = "Available Actions";
-
     tableHead.appendChild(thName);
     tableHead.appendChild(thPos);
     tableHead.appendChild(thRating);
@@ -1009,40 +1066,41 @@ function loadRecruitsPage(){
     for (recruit in gameData["recruiting-class"]) {
         var playerRow = document.createElement("tr");
         playerRow.classList.add("player-instance");
-        playerRow.id = "recruit-" + recruit;
-        
+        playerRow.id = "recruit-" + recruit
         var tdName = document.createElement("td");
         tdName.classList.add("name");
         tdName.innerHTML = gameData["recruiting-class"][recruit]["name"];
-        
         var tdPos = document.createElement("td");
         tdPos.classList.add("position");
         tdPos.innerHTML = gameData["recruiting-class"][recruit]["position"];
-        
         var tdRating = document.createElement("td");
         tdRating.classList.add("rating");
         tdRating.innerHTML = gameData["recruiting-class"][recruit]["rating"];
-
         var tdCommit = document.createElement("td");
         tdCommit.classList.add("commit");
         if (gameData["recruiting-class"][recruit]["commit"] === false) {
             tdCommit.innerHTML = "-";
         } else {
             tdCommit.innerHTML = gameData["recruiting-class"][recruit]["commit-to"];
-        };
-
+            if (gameData["recruiting-class"][recruit]["commit-to"] == gameData["user-team"]) {
+                tdName.classList.add("user-game-highlight");
+                tdPos.classList.add("user-game-highlight");
+                tdRating.classList.add("user-game-highlight");
+                tdCommit.classList.add("user-game-highlight");
+            };
+        }
         var tdUserInterest = document.createElement("td");
         tdUserInterest.classList.add("interest");
         var userInterest = gameData["recruiting-class"][recruit]["interest"][gameData["user-team"]];
-        // tdUserInterest.innerHTML = userInterest;
+        // display progress bar instead of directly displaying number or percentage
         var userInterestBarContainer = document.createElement("div");
         userInterestBarContainer.classList.add("interest-bar-container");
         tdUserInterest.appendChild(userInterestBarContainer);
         var userInterestBarProgress = document.createElement("div");
-        userInterestBarProgress.setAttribute("style", "width:" + Math.min(Math.floor((userInterest/gameData["settings"]["commit-interest-req"])*100), 100) + "%");
+        userInterestBarProgress.setAttribute("style", "width:" + Math.min(Math.floor((userInterest/gameData["settings"]["interest-required-to-commit"])*100), 100) + "%");
         userInterestBarProgress.classList.add("interest-bar-progress");
         userInterestBarContainer.appendChild(userInterestBarProgress);
-
+        // td which contains buttons for each available recruiting action based on whether or not a recruit has commit and how much recruiting time the user has left in the week
         var tdRecruitingActions = document.createElement("td");
         tdRecruitingActions.classList.add("recruiting-options");
         for (option in gameData["recruiting-options"]) {
@@ -1057,10 +1115,9 @@ function loadRecruitsPage(){
                         userRecruitingAction(recruit, option);
                     }
                 })(recruit, option));
-            };
+            }
             tdRecruitingActions.appendChild(recruitingActionButton);
         }
-
         playerRow.appendChild(tdName);
         playerRow.appendChild(tdPos);
         playerRow.appendChild(tdRating);
@@ -1079,7 +1136,7 @@ function reloadActivePage(){
     if (activePage.id == "menu-home") {
         loadHomePage();
     } else if (activePage.id == "menu-roster") {
-        loadRosterPagePlayers();
+        loadRosterPagePlayers(); // for roster, only reload roster page players such that if user is viewing another team's roster it does not revert to user roster
     } else if (activePage.id == "menu-schedule") {
         loadSchedulePage();
     } else if (activePage.id == "menu-standings") {
@@ -1092,7 +1149,6 @@ function reloadActivePage(){
 
 /* ACTION BOX */
 function updateActionButton(){
-    console.log("Updating available actions...");
     var advanceButton = document.getElementById("advance-button");
     if (gameData["current-week"] <= gameData["settings"]["num-games"]) {
         var newAdvanceButton = advanceButton.cloneNode(true);
