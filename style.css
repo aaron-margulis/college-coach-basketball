@@ -76,6 +76,11 @@ h1 {
     color: var(--primary);
 }
 
+#start-screen a {
+    color: var(--primary);
+    text-decoration-color: var(--secondary);
+}
+
 
 /* GAME BOX */
 /* GRID LAYOUT */
@@ -102,6 +107,8 @@ h1 {
 }
 
 #dynamic-box {
+    min-width: 800px;
+    min-height: 400px;
     grid-column: 3 / span 2;
     grid-row: 3;
     overflow: auto;
@@ -183,6 +190,39 @@ th, td {
 }
 
 /* HOME PAGE */
+.home-page-active {
+    display: grid;
+    grid-template-columns: auto 200px;
+    grid-template-rows: 200px auto;
+}
+
+#standings-preview {
+    grid-column: 1;
+    grid-row: 1;
+    border: 1px solid hotpink;
+}
+
+#standings-preview table {
+    margin: auto;
+    overflow: auto;
+}
+
+#recruits-preview {
+    grid-column: 2;
+    grid-row: 1;
+    border: 1px solid hotpink;
+}
+
+#schedule-preview {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    border: 1px solid hotpink;
+}
+
+#schedule-preview table {
+    margin: auto;
+    overflow: auto;
+}
 
 /* ROSTER PAGE */
 .roster-page-active {
@@ -217,6 +257,13 @@ th, td {
 }
 
 /* SCHEDULE PAGE */
+.schedule-week-header {
+    color: var(--secondary);
+}
+
+.schedule-week-table {
+    margin: auto;
+}
 
 /* STANDINGS PAGE */
 #standings-table {
